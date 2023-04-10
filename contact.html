@@ -1,0 +1,92 @@
+<?php
+
+$nome = $_POST['nome'];
+
+$email = $_POST['email'];
+
+$phone = $_POST['phone'];
+
+$titulo = $_POST['subject'];
+
+$texto = $_POST['message'];
+
+date_default_timezone_set('America/Sao_Paulo');
+
+$data_envio = date('d/m/Y');
+
+$hora_envio = date('H:i:s');
+
+
+$destinatario = "cfkamelcorretora@gmail.com";
+
+$email_remetente = "contato@kamelcorretora.com.br";
+//$email_remetente = "s8comunicacao.ti@gmail.com";
+
+$mensagem1 = "
+
+Data da Mensagem - $data_envio
+Hora da Mensagem - $hora_envio
+
+Uma mensagem vinda do site!
+
+$nome enviou esta mensagem pelo site.
+
+Assunto - $titulo
+
+Nome: $nome
+Email: $email
+Telefone: $phone
+Mensagem: $texto
+
+";
+
+
+$mensagem2 = "
+
+Nós, da Kamel, agradecemos o seu contato!
+
+Retornaremos assim que possível.
+
+________________________________________________________
+
+Assunto: $titulo
+
+Nome: $nome
+Email: $email
+Telefone: $phone
+Mensagem: $texto
+
+
+
+Kamel Corretora de Seguros
+Endereço: Avenida Rio Branco, 122, 8º Andar, Centro, Rio de Janeiro
+Site: https://kamelcorretora.com.br
+Contatos: (21) 2283-5849 / (21) 99252-7873
+E-mail: cfkamelcorretora@gmail.com
+
+";
+
+
+// É necessário indicar que o formato do e-mail é html
+  $headers  = 'MIME-Version: 1.1\n';
+      $headers .= 'Content-type: text/html; charset=iso-8859-1\n';
+      $headers .= 'From: S8 Comunicação <$email_remetente> \n';
+      $headers .= 'Return-Path: S8 Comunicação <$email_remetente>\n';
+      //$headers .= 'Cc: $email\n';
+      //$headers .= 'Reply-To: $email\n';
+      //$headers .= 'Cc: Contato <$destinatario> \n';
+      //$headers .= 'From: $nome <$email>';
+  
+  $headers2  = 'MIME-Version: 1.1\n';
+      $headers2 .= 'Content-type: text/html; charset=iso-8859-1\n';
+      $headers2 .= 'From: S8 Comunicação <$email_remetente> \n';
+      $headers2 .= 'Return-Path: S8 Comunicação <$email_remetente>\n';
+      
+
+mail($destinatario, $titulo, $mensagem1, $headers, "-f$email_remetente");
+
+mail($email, $titulo, $mensagem2, $headers2, "-f$email_remetente");
+
+echo "<script> alert('Mensagem enviada com sucesso! Kamel agradece o seu contato!'); location.href='https://kamelcorretora.com.br/';</script>";
+?>
+
